@@ -1,0 +1,28 @@
+services:
+  db:
+    image: postgres:15
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: happinessdb
+    volumes:
+      - db-data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+
+  api:
+    build: .
+    depends_on:
+      - db
+    environment:
+      DATABASE_URL: postgresql+asyncpg://postgres:postgres@db:5432/happinessdb
+      JWT_SECRET: supersecretjwt
+      CSV_PATH: /data/world_happiness_clean.csv
+    volumes:
+      - ./:/app
+      - "C:/Users/prikt/OneDrive/Documentos/Backend Dash/world_happiness_clean.csv:/data/world_happiness_clean.csv:ro"
+    ports:
+      - "8000:8000"
+
+volumes:
+  db-data:

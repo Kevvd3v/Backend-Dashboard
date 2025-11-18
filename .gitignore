@@ -1,0 +1,20 @@
+# Entorno virtual
+.venv/
+venv/
+env/
+
+# Archivos de Python
+app/routers/__pycache__
+../../__pycache__/
+__pycache__/
+*.pyc
+# Configuración sensible
+.env
+
+# Archivos de logs
+*.log
+
+# Carpeta de dependencias de Docker
+/data/
+.env
+world_happiness_clean.csv
