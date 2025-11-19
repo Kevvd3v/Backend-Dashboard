@@ -6,18 +6,31 @@ from app.models import Happiness
 
 router = APIRouter(prefix="/api/kpis", tags=["kpis"])
 
-@router.get("/avg-happiness")
-async def avg_happiness(year: int, session: AsyncSession = Depends(get_session)):
-    q = select(func.avg(Happiness.happiness_score)).where(Happiness.year == year)
-    r = await session.exec(q)
-    val = r.one()
-    return {"year": year, "avg_happiness": float(val) if val is not None else None}
+@router.get("/summary")
+async def get_kpi_summary(year: int, session: AsyncSession = Depends(get_session)):
+    statement = select(
+        func.avg(Happiness.happiness_score),
+        func.avg(Happiness.gdp_per_capita),
+        func.avg(Happiness.social_support)
+    ).where(Happiness.year == year)
+
+    result = await session.exec(statement)
+    data = result.first() # Retorna una tupla (avg_happiness, avg_gdp, avg_social)
+
+    if not data:
+        return {"happiness": 0, "gdp": 0, "social": 0}
+
+    def format_val(val):
+        return float(val) if val is not None else 0.0
+
+    return {
+        "happiness": format_val(data[0]),
+        "gdp": format_val(data[1]),
+        "social": format_val(data[2])
+    }
 
 @router.get("/trend")
 async def trend(country: str, session: AsyncSession = Depends(get_session)):
-    # retorna serie {year, score}
-    q = select(Happiness).join_from(Happiness, Happiness) 
-    from sqlmodel import select
     from app.models import Country
     q = select(Happiness).join(Country).where(Country.name == country).order_by(Happiness.year)
     r = await session.exec(q)
