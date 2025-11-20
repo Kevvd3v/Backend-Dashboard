@@ -17,7 +17,7 @@ services:
     environment:
       DATABASE_URL: postgresql+asyncpg://postgres:postgres@db:5432/happinessdb
       JWT_SECRET: supersecretjwt
-      CSV_PATH: /app/data/world_happiness_clean.csv
+      CSV_PATH: /app/app/data/world_happiness_clean.csv
     volumes:
       - ./:/app
     ports:
