@@ -5,10 +5,10 @@ import pandas as pd
 import math
 
 from sqlmodel.ext.asyncio.session import AsyncSession
-from app.deps import async_engine  # ensure PYTHONPATH=/app when running
+from app.deps import async_engine
 from app.crud import get_or_create_region, get_or_create_country, create_happiness
 
-CSV_PATH = os.getenv("CSV_PATH", "/app/app/data/world_happiness_clean")
+CSV_PATH = os.getenv("CSV_PATH")
 BATCH_SIZE = int(os.getenv("LOAD_BATCH_SIZE", "200"))
 
 
