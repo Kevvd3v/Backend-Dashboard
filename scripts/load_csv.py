@@ -8,7 +8,7 @@ from sqlmodel.ext.asyncio.session import AsyncSession
 from app.deps import async_engine  # ensure PYTHONPATH=/app when running
 from app.crud import get_or_create_region, get_or_create_country, create_happiness
 
-CSV_PATH = os.getenv("CSV_PATH", "/data/world_happiness_clean.csv")
+CSV_PATH = os.getenv("CSV_PATH", "/app/data/world_happiness_clean.csv")
 BATCH_SIZE = int(os.getenv("LOAD_BATCH_SIZE", "200"))
 
 
