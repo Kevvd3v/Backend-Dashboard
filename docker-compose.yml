@@ -20,7 +20,6 @@ services:
       CSV_PATH: /data/world_happiness_clean.csv
     volumes:
       - ./:/app
-      - "C:/Users/prikt/OneDrive/Documentos/Backend Dash/world_happiness_clean.csv:/data/world_happiness_clean.csv:ro"
     ports:
       - "8000:8000"
 
