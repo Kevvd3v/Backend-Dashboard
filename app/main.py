@@ -6,7 +6,7 @@ from fastapi.middleware.cors import CORSMiddleware
 app = FastAPI(title="Happiness API")
 
 origins = [
-    "https://frontend-dashboard.vercel.app", # <--- ¡IMPORTANTE!
+    "https://frontend-dashboard-lilac.vercel.app"
     "http://localhost:5173", 
 ]
 
