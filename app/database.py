@@ -1,4 +1,3 @@
-# Windows PowerShell: sobrescribe app/database.py con el contenido correcto
 from sqlmodel import SQLModel
 from sqlalchemy.ext.asyncio import create_async_engine
 from sqlalchemy import create_engine
